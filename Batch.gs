@@ -71,7 +71,7 @@ function invitingMessageBatch() {
             },
             {
               "type": "text",
-              "text": "2月26日までに入力してください。", // メッセージは仮のため要修正
+              "text": "2月26日までに入力してください。", // TODO メッセージは仮のため要修正
               "size": "13px",
               "weight": "bold",
               "offsetBottom": "5px"
