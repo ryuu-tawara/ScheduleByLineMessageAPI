@@ -102,5 +102,5 @@ function invitingMessageBatch() {
     }
   ];
 
-  new lineGateway.sendMessage(messages);
+  lineGateway.sendMessage(messages);
 }
