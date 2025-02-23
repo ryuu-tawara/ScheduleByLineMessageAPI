@@ -10,7 +10,7 @@ class SpreadsheetMapper {
    * @return 対象シート
    */
   getSheet(sheetName) {
-    return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName)
+    return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   }
   /**
    * スプレッドシートに読み込む(横方向)
