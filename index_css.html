@@ -1,0 +1,80 @@
+<style>
+  h2 {
+    color: red;
+  }
+
+  tr {
+    text-align: center;
+    font-size: 25px;
+  }
+
+  input.send {
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 100px;
+    display: none;
+  }
+
+  .table_design {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+  }
+
+  .table_design th,
+  .table_design td {
+    border: 2px solid #d2e8f1;
+    padding: 1em;
+  }
+
+  .table_design thead th {
+    background-color: #4d9bc1;
+    color: #fff;
+    border: 2px solid #4d9bc1;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  .table_design thead th:last-of-type {
+    border-right: 2px solid #4d9bc1;
+  }
+
+  .table_design tbody th {
+    color: #4d9bc1;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 787px) {
+    .table_design {
+      text-align: left;
+    }
+
+    .table_design thead {
+      display: none;
+    }
+
+    .table_design th,
+    .table_design td {
+      display: block;
+      border: 0;
+      border-bottom: 2px solid #e6f1f6;
+    }
+
+    .table_design tbody th {
+      background: #4d9bc1;
+      color: #fff;
+    }
+
+    .table_design td::before {
+      content: attr(data-label);
+      color: #4d9bc1;
+      font-weight: bold;
+      display: inline-block;
+      width: 20%;
+      min-width: 4em;
+    }
+  }
+</style>

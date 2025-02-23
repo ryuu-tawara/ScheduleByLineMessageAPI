@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('index_css').getContent(); ?>
+  </head>
+
+  <body>
+    <title>日程選択</title>
+    <h1>飲み会に参加できない日程を選択してください。</h1>
+    <h2 id="load">ロード中です。しばらくお待ちください。</h2>
+    <table id="holidayTable" class="table_design">
+      <thead id="holidays">
+        <tr>
+          <th class="tableHead">日付</th>
+         </tr>
+       </thead>
+    </table>
+
+    <input id="send" class="send" type="button" value="送信する" onclick="sendDates()"/>
+    <?!= HtmlService.createHtmlOutputFromFile('index_js').getContent(); ?>
+  </body>
+
+</html>

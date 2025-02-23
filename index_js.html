@@ -1,0 +1,115 @@
+<script>
+  init();
+
+  /**
+   * 初期化処理
+   * テーブルに休日の日程を設定する
+   */
+  async function init() {
+    const showHolidays = await getShowHolidays();
+    const beforeColor = "rgb(255, 255, 255)";
+    const afterColor = "rgb(50, 50, 50)";
+
+    // テーブルを作成する
+    for (let holidayIndex in showHolidays) {
+      let td = document.createElement("td");
+      td.textContent = showHolidays[holidayIndex];
+
+      let input = document.createElement("input");
+      input.type = "hidden";
+      input.value = 1;
+      input.id = holidayIndex;
+
+      let tr = document.createElement("tr");
+      tr.style.backgroundColor = beforeColor;
+      tr.addEventListener(
+        "click",
+        // クリック後に背景を黒色に変更する
+        function() {
+          if (this.style.backgroundColor == beforeColor) {
+            this.style.backgroundColor = afterColor;
+            // inputの値を予定ありに書き変える
+            this.children[1].setAttribute("value", 0);
+          } else {
+            this.style.backgroundColor = beforeColor;
+            // inputの値を予定無しに書き変える
+            this.children[1].setAttribute("value", 1);
+          }
+        }
+      );
+      tr.appendChild(td);
+      tr.appendChild(input);
+
+      document.getElementById("holidays").appendChild(tr);
+    }
+
+    // jsの処理が終わるとロードメッセージを隠す。
+    const loadMessage = document.getElementById("load");
+    loadMessage.style.display = 'none'; 
+
+    // jsの処理が終わると送信ボタンを押せるようにする
+    const sendMessage = document.getElementById("send");
+    sendMessage.style.display = 'block';
+  }
+
+  /**
+   * 休日の行くか行かないかの配列(0: 行かない, 1: 行く)
+   * 
+   * @param holidayLength　休日の配列数
+   * @returns アプリのURL
+   */
+  function collectHolidayValues(holidayLength) {
+    const holidayValues = [];
+
+    for (let holidayIndex = 0; holidayIndex < holidayLength; holidayIndex++) {
+      let value = document.getElementById(holidayIndex).value;
+      holidayValues.push(value);
+    }
+
+    return holidayValues;
+  }
+
+  /**
+   * urlに選択した日付をセットし、main.gasに遷移する
+   */
+  async function sendDates() {
+    const holidayLength = document.getElementById("holidayTable").rows.length - 1; // ヘッダー行を除くため
+    const holidayValues = collectHolidayValues(holidayLength);
+
+    const url = await getAppUrl();
+    console.log(holidayValues);
+    window.top.location.href = url + `?page=sendDates&holidayValues=${holidayValues}`;
+  }
+
+  /**
+   * アプリのURLを取得する
+   * 
+   * @returns アプリのURL
+   */
+  function getAppUrl() {
+      const result = new Promise((resolve, reject) => {
+        google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(reject)
+          .getAppUrl();
+      });
+
+      return result;
+  }
+
+  /**
+   * 休日のリストを取得する
+   * 
+   * @returns 休日のリスト 
+   */
+  function getShowHolidays() {
+    const result = new Promise((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(reject)
+        .getShowHolidays();
+    });
+    
+    return result;
+  }
+</script>
