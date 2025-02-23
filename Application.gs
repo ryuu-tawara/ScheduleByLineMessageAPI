@@ -19,7 +19,7 @@ function doGet(e) {
   let html;
   if (e.parameter.page == "sendDates" && e.parameter.holidayValues != null) {
     sendData(mailAdddress, e.parameter.holidayValues.split(","));
-    lineGateway.sendMessage([{"type": "text", "text": `${mailAdddress}さん、入力ありがとう！`}])
+    lineGateway.sendMessage([{"type": "text", "text": `${mailAdddress}さん、入力ありがとう！`}]);
 
     // 1秒だけ完了画面を表示する
     const waitTime = 1;
