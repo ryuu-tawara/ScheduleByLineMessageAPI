@@ -38,7 +38,7 @@ function spreadSheetSettingBatch() {
  * Lineグループに集計メッセージを送信する
  */
 function invitingMessageBatch() {
-  if (isSkipBatch()) return
+  if (isSkipBatch()) return;
 
   const appURL = ScriptApp.getService().getUrl() + "?openExternalBrowser=1";
 
