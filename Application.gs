@@ -8,6 +8,15 @@ var lineGateway = new LineGateway();
  * Getメソッド
  */
 function doGet(e) {
+
+  // 必要な権限を取得する
+  ScriptApp.requireScopes(ScriptApp.AuthMode.FULL, [
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/spreadsheets"
+  ]);
+
   const mailAdddress = Session.getActiveUser().getEmail();
 
   if (isInvalideMailAddress(mailAdddress)) {

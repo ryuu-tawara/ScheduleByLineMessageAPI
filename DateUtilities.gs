@@ -70,6 +70,10 @@ function isHoliday(date) {
   if (day == 0 || day == 6) return true;
 
   // 祝日判定(カレンダーから判定)
-  const calendar = CalendarApp.getCalendarById("ja.japanese#holiday@group.v.calendar.google.com");
+  let holidayCalendar = CalendarApp.getCalendarById("ja.japanese#holiday@group.v.calendar.google.com"); // 休日も含む
+  if (holidayCalendar == null) {
+    holidayCalendar = CalendarApp.getCalendarById("ja.japanese.official#holiday@group.v.calendar.google.com"); // 祝日のみ
+  }
+
   return calendar.getEventsForDay(date).length > 0;
 }
